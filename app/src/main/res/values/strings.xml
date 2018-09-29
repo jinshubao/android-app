@@ -2,4 +2,5 @@
     <string name="app_name">Hello</string>
     <string name="hello_world">hello world!</string>
     <string name="btn_send_text">send</string>
+    <string name="loading">loading…</string>
 </resources>
