@@ -1,10 +1,11 @@
 package com.example.jinshubao.myapplication.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -31,15 +32,25 @@ public class MainActivity extends AppCompatActivity {
 
     private SmartRefreshLayout refreshLayout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         refreshLayout = findViewById(R.id.refreshLayout);
 
-        RefreshListener refreshListener = new RefreshListener(this, R.id.refreshLayout, R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        ImageListAdapter adapter = new ImageListAdapter(this, null);
+        recyclerView.setAdapter(adapter);
+
+        RefreshListener refreshListener = new RefreshListener(this, adapter);
         refreshLayout.setOnRefreshListener(refreshListener);
         refreshLayout.setOnLoadMoreListener(refreshListener);
+
     }
 
     @Override
@@ -55,59 +66,69 @@ public class MainActivity extends AppCompatActivity {
     private class RefreshListener implements OnRefreshListener, OnLoadMoreListener {
 
         private Context context;
-        private SmartRefreshLayout refreshLayout;
-        private RecyclerView recyclerView;
+        ImageListAdapter adapter;
         private int page = 1;
-        private int pageSize = 50;
+        private int pageSize = 20;
 
-        public RefreshListener(Context context, int refreshLayoutId, int listId) {
+        private ImageApi imageApi;
+
+        public RefreshListener(Context context, ImageListAdapter adapter) {
             this.context = context;
-            this.refreshLayout = ((Activity) context).findViewById(refreshLayoutId);
-            this.recyclerView = ((Activity) context).findViewById(listId);
-            this.loadData(1, pageSize);
+            this.adapter = adapter;
+            this.imageApi = RetrofitUtils.createApi(ImageApi.class);
+            this.loadData(1, pageSize, LoadType.REFRESH);
         }
 
         @Override
         public void onRefresh(@NonNull RefreshLayout refreshLayout) {
             page = 1;
-            this.loadData(page, pageSize);
+            this.loadData(page, pageSize, LoadType.REFRESH);
         }
 
         @Override
         public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-            this.loadData(page++, pageSize);
+            this.loadData(page++, pageSize, LoadType.LOAD);
         }
 
-        private void loadData(final int page, int pageSize) {
-            ImageApi imageApi = RetrofitUtils.createApi(ImageApi.class);
+        private void loadData(final int page, int pageSize, LoadType loadType) {
+
             imageApi.images(page, pageSize)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new CommonObserver<ImageModel>() {
                         @Override
                         public void onNext(ImageModel resultHelper) {
-                            ImageListAdapter adapter = (ImageListAdapter) mListView.getAdapter();
                             List<ImageModel.ImageVo> results = resultHelper.getResults();
-                            adapter.clear();
+                            if (loadType == LoadType.REFRESH) {
+                                adapter.clear();
+                            }
                             adapter.addAll(results);
-                            Toast.makeText(context, "加载了" + results.size() + "条数据", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onError(Throwable e) {
-                            refreshLayout.finishRefresh(false);
-                            refreshLayout.finishLoadMore(false);
+                            finish(loadType, false);
                             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                         }
 
                         @Override
                         public void onComplete() {
-                            //关闭刷新动画
-                            refreshLayout.finishRefresh();
-                            refreshLayout.finishLoadMore();
+                            finish(loadType, true);
                         }
                     });
         }
 
+        private void finish(LoadType loadType, boolean success) {
+            if (loadType == LoadType.REFRESH) {
+                refreshLayout.finishRefresh(success);
+            } else {
+                refreshLayout.finishLoadMore(success);
+            }
+        }
+
+    }
+
+    private enum LoadType {
+        REFRESH, LOAD
     }
 }
