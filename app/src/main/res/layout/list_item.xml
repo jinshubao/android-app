@@ -5,24 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="5dp"
     tools:ignore="UseCompoundDrawables">
 
     <ImageView
-        android:id="@+id/banner_image"
-        android:layout_height="wrap_content"
+        android:id="@+id/item_image"
         android:layout_width="match_parent"
-        android:layout_marginBottom="10dp"
-        android:background="#FFFFFF"
-        android:scaleType="fitCenter"
-        android:contentDescription=""/>
+        android:layout_height="400dp"
+        android:contentDescription="" />
 
     <TextView
-        android:id="@+id/banner_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/item_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lines="2"
+        android:lines="1"
         android:text=""
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/darker_gray"
         android:textSize="14sp" />
 
 </LinearLayout >

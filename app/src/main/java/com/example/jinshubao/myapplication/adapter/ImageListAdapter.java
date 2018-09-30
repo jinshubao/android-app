@@ -34,10 +34,11 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
             this.requestOptions = requestOptions;
         } else {
             this.requestOptions = new RequestOptions()
-//                    .centerCrop()
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .error(new ColorDrawable(Color.BLUE))
                     .fallback(new ColorDrawable(Color.RED))
+                    .centerCrop()
+//                    .fitCenter()
                     .timeout(1000)
                     .theme(context.getTheme());
         }
@@ -87,8 +88,8 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.banner_image);
-            textView = itemView.findViewById(R.id.banner_name);
+            imageView = itemView.findViewById(R.id.item_image);
+            textView = itemView.findViewById(R.id.item_title);
         }
     }
 }
