@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity">
+        </activity>
+        <activity android:name=".activity.ImageActivity" />
+        <activity android:name=".activity.SeplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

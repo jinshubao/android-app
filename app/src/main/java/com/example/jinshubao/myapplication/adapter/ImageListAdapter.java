@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.jinshubao.myapplication.R;
 import com.example.jinshubao.myapplication.model.ImageModel;
@@ -21,6 +22,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyViewHolder> {
+
     private Context context;
     private LayoutInflater inflater;
     private RequestOptions requestOptions;
@@ -34,6 +36,8 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
             this.requestOptions = requestOptions;
         } else {
             this.requestOptions = new RequestOptions()
+                    .skipMemoryCache(false)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .error(new ColorDrawable(Color.BLUE))
                     .fallback(new ColorDrawable(Color.RED))
@@ -47,7 +51,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = inflater.inflate(R.layout.list_item, viewGroup, false);
+        View view = inflater.inflate(R.layout.image_list_item, viewGroup, false);
         return new MyViewHolder(view);
     }
 

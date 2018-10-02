@@ -8,10 +8,9 @@ import java.util.Objects;
 
 public class SPUtils {
 
-    public static final String TOKEN_KEY = "access_token";
-    public static final String TOKEN_TYPE = "token_type";
-    public static final String TOKEN_EXPIRES_IN = "expires_in";
-    public static final String TOKEN_REFRESH_TOKEN = "refresh_token";
+    public static final String LIST_PAGE_NUM = "LIST_PAGE_NUM";
+    public static final String LIST_PAGE_SIZE = "LIST_PAGE_SIZE";
+
 
     private static SharedPreferences preferences = null;
 
@@ -20,11 +19,22 @@ public class SPUtils {
     }
 
     public static void putString(String key, String value) {
-        Objects.requireNonNull(preferences, "preferences 未初始化").edit().putString(key, value).apply();
+        if (value != null) {
+            Objects.requireNonNull(preferences, "preferences 未初始化").edit().putString(key, value).apply();
+        }
     }
 
-    public static String getString(String key) {
-        return Objects.requireNonNull(preferences, "preferences 未初始化").getString(key, null);
+    public static String getString(String key, String defValue) {
+        return Objects.requireNonNull(preferences, "preferences 未初始化").getString(key, defValue);
+    }
+
+
+    public static void putInt(String key, int value) {
+        Objects.requireNonNull(preferences, "preferences 未初始化").edit().putInt(key, value).apply();
+    }
+
+    public static int getInt(String key, int defValue) {
+        return Objects.requireNonNull(preferences, "preferences 未初始化").getInt(key, defValue);
     }
 
 }

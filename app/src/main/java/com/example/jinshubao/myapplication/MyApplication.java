@@ -2,6 +2,7 @@ package com.example.jinshubao.myapplication;
 
 import android.app.Application;
 
+import com.example.jinshubao.myapplication.utils.SPUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
@@ -25,5 +26,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        SPUtils.init(this);
     }
 }
