@@ -2,23 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="10dp"
     android:orientation="vertical">
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="showImage"
-        android:text="看图"/>
+        android:text="@string/button_01_name"/>
     <Button
+        android:text="@string/button_02_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
+        android:text="@string/button_03_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
+        android:text="@string/button_04_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
+        android:text="@string/button_05_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

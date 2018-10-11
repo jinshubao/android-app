@@ -51,7 +51,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = inflater.inflate(R.layout.image_list_item, viewGroup, false);
+        View view = inflater.inflate(R.layout.image_item, viewGroup, false);
         return new MyViewHolder(view);
     }
 

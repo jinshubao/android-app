@@ -3,4 +3,9 @@
     <string name="hello_world">你好!</string>
     <string name="btn_send_text">发送</string>
     <string name="loading">加载中。。。</string>
+    <string name="button_01_name">看图</string>
+    <string name="button_02_name">button_02</string>
+    <string name="button_03_name">button_03</string>
+    <string name="button_04_name">button_04</string>
+    <string name="button_05_name">button_03</string>
 </resources>
