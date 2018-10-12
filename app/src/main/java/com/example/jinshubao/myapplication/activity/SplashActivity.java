@@ -10,15 +10,20 @@ import com.example.jinshubao.myapplication.R;
 
 public class SplashActivity extends AppCompatActivity {
 
+    private boolean skip = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        new Handler().postDelayed(this::skipSplash, 3000);
+        new Handler().postDelayed(() -> this.skipSplash(null), 3000);
     }
 
-    public void skipSplash() {
-        startActivity(new Intent(SplashActivity.this, MainActivity.class));
-        finish();
+    public void skipSplash(View view) {
+        if (!skip) {
+            skip = true;
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            finish();
+        }
     }
 }
