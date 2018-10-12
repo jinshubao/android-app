@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
+    buildToolsVersion '28.0.2'
     defaultConfig {
         applicationId "com.example.jinshubao.myapplication"
         minSdkVersion 21
@@ -18,7 +19,6 @@ android {
             renderscriptDebuggable false
             versionNameSuffix 'release'
             buildConfigField "String", "API_ENV", "\"http://10.52.2.100:8014\""
-            buildConfigField "String", "NEWS_API", "\"http://c.m.163.com\""
             buildConfigField "String", "IMAGE_API", "\"https://gank.io\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -27,12 +27,11 @@ android {
             debuggable true
             versionNameSuffix 'debug'
             buildConfigField "String", "API_ENV", "\"http://10.52.2.51:8012\""
-            buildConfigField "String", "NEWS_API", "\"http://c.m.163.com\""
             buildConfigField "String", "IMAGE_API", "\"https://gank.io\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '28.0.2'
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
