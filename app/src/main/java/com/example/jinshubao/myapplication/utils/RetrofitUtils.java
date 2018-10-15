@@ -12,11 +12,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitUtils {
 
+    private static Retrofit.Builder builder = new Retrofit.Builder()
+            .baseUrl(BuildConfig.API_ENV)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
+
     public static <T> T createApi(@NonNull Class<T> tClass) {
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl(BuildConfig.API_ENV)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
+
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
