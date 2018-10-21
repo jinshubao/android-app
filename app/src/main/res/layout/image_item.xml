@@ -13,15 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:background="@drawable/ic_launcher_foreground"
-        android:contentDescription="" />
+        android:contentDescription="@string/image_item_desc" />
 
     <TextView
         android:id="@+id/item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lines="1"
-        android:text=""
+        android:contentDescription="@string/image_item_title"
         android:gravity="center_horizontal"
+        android:lines="1"
+        android:text="@android:string/untitled"
         android:textColor="@android:color/darker_gray"
         android:textSize="14sp" />
 

@@ -9,4 +9,7 @@
     <string name="button_04_name">button_04</string>
     <string name="button_05_name">button_03</string>
     <string name="skip">skip</string>
+    <string name="image_item_desc">item image</string>
+    <string name="image_item_title">image item title</string>
+    <string name="splash_desc">splash desc</string>
 </resources>
